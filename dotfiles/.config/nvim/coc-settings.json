@@ -3,6 +3,7 @@
   "javascript.suggest.autoImports": true,
   "typescript.suggest.autoImports": true,
   "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
     "javascript",
     "json",
     "javascriptreact"

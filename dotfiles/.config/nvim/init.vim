@@ -19,49 +19,84 @@ set termguicolors
 
 call plug#begin('~/.vim/plugged')
 
+" Base vim plugin
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'gruvbox-community/gruvbox'
+Plug 'Yggdroot/indentLine'
 Plug 'neovim/nvim-lspconfig'
+
+" Nvim lua
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'glepnir/lspsaga.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'vim-syntastic/syntastic'
 " Telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
+" Nvim file tree
+Plug 'preservim/nerdtree'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
 
-"colorscheme
-"Dracula
+" colorscheme
+Plug 'gruvbox-community/gruvbox'
+" Dracula
 Plug 'Mofiqul/dracula.nvim'
 " vsCode
 Plug 'tomasiser/vim-code-dark'
 
-Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'nvim-lualine/lualine.nvim'
+
 Plug 'akinsho/bufferline.nvim'
-Plug 'christianchiarulli/nvcode-color-schemes.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'christianchiarulli/nvcode-color-schemes.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'voldikss/vim-floaterm'
 
+Plug 'mhinz/vim-startify'
+
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-" Configuration example
+" remove after gaining some skills in vim;
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+" Foat terminal shortkeys
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
-" configure treesitter
+" NERDTree 
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
+
+lua << END
+require('lualine').setup()
+END
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -72,11 +107,11 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" configure nvcode-color-schemes
 let g:nvcode_termcolors=256
 
 syntax on
-colorscheme nvcode 
+
+colorscheme gruvbox " Or whatever colorscheme you make
 
 
 " checks if your terminal has 24-bit color support
@@ -146,27 +181,9 @@ require("bufferline").setup{}
 EOF
 nnoremap <silent><TAB> :BufferLineCycleNext<CR>
 nnoremap <silent><S-TAB> :BufferLineCyclePrev<CR>
-
-" kyazdani42/nvim-tree.lua {{{
-" let g:nvim_tree_auto_close = 1
-" let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ]
-let g:nvim_tree_quit_on_open = 1
-let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_group_empty = 1
-
-lua << EOF
-require'nvim-tree'.setup {
-  -- lsp_diagnostics = true,
-  ignore_ft_on_setup  = { 'startify', 'dashboard' },
-}
-EOF
-
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <silent><C-DELETE> :bdelete<CR>
 "}}}
+
 " coc config
 let g:coc_global_extensions = [
   \ 'coc-snippets',
