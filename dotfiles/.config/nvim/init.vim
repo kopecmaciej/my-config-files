@@ -111,7 +111,7 @@ let g:nvcode_termcolors=256
 
 syntax on
 
-colorscheme gruvbox " Or whatever colorscheme you make
+colorscheme nvcode " Or whatever colorscheme you make
 
 
 " checks if your terminal has 24-bit color support
@@ -191,6 +191,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
+  \ 'coc-emmet',
   \ 'coc-json', 
   \ ]
 set hidden
