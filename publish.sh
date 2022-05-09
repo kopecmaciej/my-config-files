@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/.config/nvim/init.vim ~/.config/nvim/coc-settings.json dotfiles/.config/nvim/   
+cp -r ~/.config/nvim ./dotfiles/.config/   
 
 git add .
 
