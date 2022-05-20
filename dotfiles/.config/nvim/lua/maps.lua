@@ -24,3 +24,29 @@ keymap('n', '<leader>c', ':nohl<CR>', opts)
 keymap('n', '<leader>s', ':w<CR>', opts)
 keymap('i', '<leader>s', '<C-c>:w<CR>', opts)
 
+-- Trouble
+keymap("n", "<leader>tx", "<cmd>Trouble<cr>", opts)
+keymap("n", "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
+keymap("n", "<leader>td", "<cmd>Trouble document_diagnostics<cr>", opts)
+keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", opts)
+keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", opts)
+keymap("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
+
+-- Lspsaga
+keymap("n", "<leader>gt", "<cmd>Lspsaga toogle_cirtual_text<cr>", opts)
+keymap("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
+keymap("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
+keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+keymap("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
+keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+keymap("n", "<leader>K", "<cmd>Lspsaga hover_doc<cr>", opts)
+keymap("n", "<F2>", "<cmd>Lspsaga rename<cr>", opts)
+keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts)
+keymap("t", "<A-d>", "<cmd>Lspsaga close_floaterm<cr>", opts)
+
+-- Format without language server
+keymap("n", "<space>n", '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<cr>', opts)
+
+

@@ -36,9 +36,9 @@ end
 -- Call setup:
 --- Each of these are documented in `:help nvim-tree.OPTION_NAME`
 nvim_tree.setup {
-  open_on_setup = true,
-  open_on_setup_file = true,
-  open_on_tab = true,
+  open_on_setup = false,
+  open_on_setup_file = false,
+  open_on_tab = false,
   update_cwd = true,
   view = { width = 32, side = "left" },
   renderer = {
@@ -50,17 +50,33 @@ nvim_tree.setup {
         none = "  ",
       },
     },
+  }, 
+  diagnostics = {
+    enable = false,
+    show_on_dirs = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  git = {
+    ignore = false,
   },
   actions = {
     change_dir = { enable = false },
+        open_file = {
+            resize_window = true
+        }
   },
   update_focused_file = {
-    enable = true,
+    enable = false,
     update_cwd = true,
   },
   filters = {
     dotfiles = true,
-    custom = { 'node_modules', '.cache', '.bin' },
+    custom = { 'node_modules', '.bin' },
   },
 }
 

@@ -19,7 +19,7 @@ set.smarttab = true
 
 set.incsearch = true
 set.signcolumn = "yes"
---set.termguicolors = true
+set.termguicolors = true
 
 set.listchars = {eol = '↵'}
 set.list = true
@@ -31,4 +31,5 @@ set.swapfile = false
 
 set.hlsearch = false
 
-set.hidden=true
+set.hidden = true
+set.conceallevel=0

@@ -43,6 +43,11 @@ return packer.startup(function(use)
     use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use 'jose-elias-alvarez/null-ls.nvim'
+    -- prettify lsp informations
+    use 'folke/trouble.nvim'
+    -- colors for trouble
+    use 'folke/lsp-colors.nvim'
+    use 'tami5/lspsaga.nvim'
     -- cmp - autocompletions
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -60,8 +65,6 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
     }
-    -- plugin for treesitter - colorize parenthesies
-    use "p00f/nvim-ts-rainbow"
 
     -- UTILS:
 
@@ -73,6 +76,8 @@ return packer.startup(function(use)
 
     -- autocomments
     use 'tpope/vim-commentary'
+    -- git helper
+    use 'tpope/vim-fugitive'
 
     -- tmux navigator - allows to nagivate between panes inside vim and tmux
     use "christoomey/vim-tmux-navigator"
