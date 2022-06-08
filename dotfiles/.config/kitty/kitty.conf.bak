@@ -1,5 +1,5 @@
 # BEGIN_KITTY_THEME
-# Doom One
+# Dimmed Monokai
 include current-theme.conf
 # END_KITTY_THEME
 allow_remote_control yes

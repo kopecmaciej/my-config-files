@@ -4,15 +4,21 @@ local term_opts = { silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
+vim.g.mapleader = " "
+
 -- Move around splits using Ctrl + {h,j,k,l}
 keymap('n', '<C-h>', '<C-w>h', opts)
 keymap('n', '<C-j>', '<C-w>j', opts)
 keymap('n', '<C-k>', '<C-w>k', opts)
 keymap('n', '<C-l>', '<C-w>l', opts)
 
-keymap('n', '<C-n>', ':NvimTreeToggle<CR>', opts)            -- open/close
-keymap('n', '<leader>f', ':NvimTreeRefresh<CR>', opts)       -- refresh
-keymap('n', '<C-f>', ':NvimTreeFindFile<CR>', opts)      -- search file
+keymap('n', '<C-n>', ':NvimTreeToggle<CR>', opts) -- open/close
+keymap('n', '<leader>f', ':NvimTreeRefresh<CR>', opts) -- refresh
+keymap('n', '<C-f>', ':NvimTreeFindFile<CR>', opts) -- search file
+
+
+keymap('i', '<A-l>', '<C-o>a', opts)
+keymap('i', '<A-k>', '<C-o>k', opts)
 
 -- Press jj fast to enter
 keymap("i", "jj", "<ESC>", opts)
@@ -22,7 +28,6 @@ keymap('n', '<leader>c', ':nohl<CR>', opts)
 
 -- Fast saving with <leader> and s
 keymap('n', '<leader>s', ':w<CR>', opts)
-keymap('i', '<leader>s', '<C-c>:w<CR>', opts)
 
 -- Trouble
 keymap("n", "<leader>tx", "<cmd>Trouble<cr>", opts)
@@ -41,8 +46,7 @@ keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 keymap("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
-keymap("n", "<leader>K", "<cmd>Lspsaga hover_doc<cr>", opts)
-keymap("n", "<F2>", "<cmd>Lspsaga rename<cr>", opts)
+keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
 keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts)
 keymap("t", "<A-d>", "<cmd>Lspsaga close_floaterm<cr>", opts)
 
@@ -50,3 +54,13 @@ keymap("t", "<A-d>", "<cmd>Lspsaga close_floaterm<cr>", opts)
 keymap("n", "<space>n", '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<cr>', opts)
 
 
+-- Bufferline
+keymap("n", "<leader>1", '<cmd>BufferLineGoToBuffer 1<CR>', opts)
+keymap("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", opts)
+keymap("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", opts)
+keymap("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", opts)
+keymap("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", opts)
+keymap("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", opts)
+keymap("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", opts)
+keymap("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", opts)
+keymap("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", opts)

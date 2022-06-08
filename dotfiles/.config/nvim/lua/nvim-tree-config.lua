@@ -15,18 +15,6 @@
 
 
 -- Global options
-local g = vim.g
-
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_respect_buf_cwd = 1
-g.nvim_tree_width_allow_resize  = 1
-g.nvim_tree_icons = { default = "" }
-g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1,
-}
 
 local status_ok, nvim_tree = pcall(require, 'nvim-tree')
 if not status_ok then
@@ -36,12 +24,15 @@ end
 -- Call setup:
 --- Each of these are documented in `:help nvim-tree.OPTION_NAME`
 nvim_tree.setup {
-  open_on_setup = false,
-  open_on_setup_file = false,
-  open_on_tab = false,
+  open_on_setup = true,
+  open_on_setup_file = true,
+  open_on_tab = true,
   update_cwd = true,
   view = { width = 32, side = "left" },
+  respect_buf_cwd = true,
   renderer = {
+    highlight_git = true,
+    highlight_opened_files = "blue",
     indent_markers = {
       enable = false,
       icons = {
@@ -50,7 +41,29 @@ nvim_tree.setup {
         none = "  ",
       },
     },
-  }, 
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = "",
+        folder = {
+          default = "",
+          open = "",
+          empty_open = "",
+          empty = "",
+          symlink = "",
+          arrow_closed = "",
+          arrow_open = "",
+          symlink_open = "",
+        }
+      }
+
+    }
+  },
   diagnostics = {
     enable = false,
     show_on_dirs = false,
@@ -66,9 +79,9 @@ nvim_tree.setup {
   },
   actions = {
     change_dir = { enable = false },
-        open_file = {
-            resize_window = true
-        }
+    open_file = {
+      resize_window = true
+    }
   },
   update_focused_file = {
     enable = false,

@@ -11,8 +11,8 @@ set.laststatus = 2 -- always show status line
 
 set.autoindent = true
 set.smartindent = true
-set.tabstop = 4 -- 1 tab = 2 spaces
-set.shiftwidth = 4 -- indentation rule
+set.tabstop = 2 -- 1 tab = 2 spaces
+set.shiftwidth = 2 -- indentation rule
 set.formatoptions = 'qnj1' -- q  - comment formatting; n - numbered lists; j - remove comment when joining lines; 1 - don't break after one-letter word
 set.expandtab = true -- expand tab to spaces
 set.smarttab = true
@@ -29,7 +29,7 @@ set.clipboard = "unnamedplus"
 set.writebackup = false
 set.swapfile = false
 
-set.hlsearch = false
+
+set.splitright = true
 
 set.hidden = true
-set.conceallevel=0

@@ -1,4 +1,3 @@
-
 local saga = require 'lspsaga'
 
 -- add your config value here
@@ -28,7 +27,6 @@ local saga = require 'lspsaga'
 -- rename_action_keys = {
 --   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
 -- },
--- definition_preview_icon = '  '
 -- "single" "double" "round" "plus"
 -- border_style = "single"
 -- rename_prompt_prefix = '➤',
@@ -38,6 +36,22 @@ local saga = require 'lspsaga'
 -- server_filetype_map = {}
 
 saga.init_lsp_saga {
---  your custom option here
+  code_action_icon = '',
+  error_sign = '', -- 
+  warn_sign = '',
+  hint_sign = '',
+  infor_sign = '',
+  definition_preview_icon = '  ',
+  code_action_prompt = {
+    enable = true,
+    sign = true,
+    sign_priority = 20,
+    virtual_text = true,
+  },
+  code_action_keys = {
+    quit = 'q', exec = '<CR>'
+  },
+  rename_action_keys = {
+    quit = '<C-c>', exec = '<CR>' -- quit can be a table
+  },
 }
-
