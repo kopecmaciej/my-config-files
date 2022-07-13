@@ -67,7 +67,7 @@ local strategy = { 'exact', 'substring', 'fuzzy' }
 vim.g.completion_matching_strategy_list = strategy
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'gopls', 'sumneko_lua', 'dockerls', 'eslint' }
+local servers = { 'tsserver', 'gopls', 'sumneko_lua', 'dockerls', 'eslint', 'html' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -75,22 +75,14 @@ for _, lsp in pairs(servers) do
 end
 
 lspconfig.tsserver.setup({
-  -- Needed for inlayHints. Merge this table with your settings or copy
-  -- it from the source if you want to add your own init_options.
   init_options = require("nvim-lsp-ts-utils").init_options,
-  --
   on_attach = function(client, bufnr)
     local ts_utils = require("nvim-lsp-ts-utils")
-
-    -- defaults
     ts_utils.setup({
       debug = false,
       disable_commands = false,
       enable_import_on_completion = false,
-
-      -- import all
       import_all_timeout = 5000, -- ms
-      -- lower numbers = higher priority
       import_all_priorities = {
         same_file = 1, -- add to existing import statement
         local_files = 2, -- git files or files with relative path markers
@@ -99,14 +91,9 @@ lspconfig.tsserver.setup({
       },
       import_all_scan_buffers = 100,
       import_all_select_source = false,
-      -- if false will avoid organizing imports
       always_organize_imports = true,
-
-      -- filter diagnostics
       filter_out_diagnostics_by_severity = {},
       filter_out_diagnostics_by_code = {},
-
-      -- inlay hints
       auto_inlay_hints = true,
       inlay_hints_highlight = "Comment",
       inlay_hints_priority = 200, -- priority of the hint extmarks
@@ -123,18 +110,12 @@ lspconfig.tsserver.setup({
         --     end,
         -- },
       },
-
-      -- update imports on file move
       update_imports_on_move = false,
       require_confirmation_on_move = false,
       watch_dir = nil,
     })
-
-    -- required to fix code action ranges and filter diagnostics
     ts_utils.setup_client(client)
-
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     -- if client.name == "tsserver" then
     --   client.server_capabilities.document_formatting = false -- 0.7 and earlier
     --   client.resolved_capabilities.document_formatting = false
@@ -176,6 +157,7 @@ lspconfig.yamlls.setup {
         url = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.20.5-standalone-strict/_definitions.json"
       },
       schemas = {
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/*.yml",
         kubernetes = "/*.yaml"
       },
       schemaDownload = { enable = true },

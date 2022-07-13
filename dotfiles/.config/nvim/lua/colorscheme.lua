@@ -1,4 +1,4 @@
-local colorscheme = "tokyonight"
+local colorscheme = "gruvbox"
 
 -- Example config in Lua
 vim.g.tokyonight_style = "night"
@@ -15,5 +15,10 @@ if not status_ok then
     vim.notify("colorscheme " .. colorscheme .. " not found!")
     return
 end
+
+vim.cmd[[highlight QuickScopePrimary guifg='#cc0000' gui=underline ctermfg=155 cterm=underline]]
+vim.cmd[[highlight QuickScopeSecondary guifg='#ffd966' gui=underline ctermfg=81 cterm=underline]]
+
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 
 

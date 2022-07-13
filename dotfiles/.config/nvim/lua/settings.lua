@@ -5,8 +5,8 @@ set.number = true -- line number on the left
 set.relativenumber = true
 
 set.showmatch  = true -- show matching brackets
-set.scrolloff = 8 -- always show 3 rows from edge of the screen
-set.synmaxcol = 300 -- stop syntax highlight after x lines for performance
+set.scrolloff  = 8 -- always show 3 rows from edge of the screen
+set.synmaxcol  = 300 -- stop syntax highlight after x lines for performance
 set.laststatus = 2 -- always show status line
 
 set.autoindent = true
@@ -21,7 +21,7 @@ set.incsearch = true
 set.signcolumn = "yes"
 set.termguicolors = true
 
-set.listchars = {eol = '↵'}
+set.listchars = { eol = '↵' }
 set.list = true
 --set.listchars:append({ extends = "tab:>\ ,trail:-,extends:>,precedes:<,eol:¬" })
 set.backup = false
@@ -33,3 +33,9 @@ set.swapfile = false
 set.splitright = true
 
 set.hidden = true
+
+vim.cmd[[highlight QuickScopePrimary guifg='#cc0000' gui=underline ctermfg=155 cterm=underline]]
+vim.cmd[[highlight QuickScopeSecondary guifg='#ffd966' gui=underline ctermfg=81 cterm=underline]]
+
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+

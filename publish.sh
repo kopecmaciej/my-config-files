@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cp -r ~/.config/nvim ./dotfiles/.config/   
+cp -r ~/.config/kitty ./dotfiles/.config/   
 
 git add .
 

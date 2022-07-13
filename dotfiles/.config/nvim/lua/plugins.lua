@@ -63,7 +63,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
 
-  -- Treesitter for syntax highligh
+  -- Treesitter for syntax highlight
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -75,9 +75,14 @@ return packer.startup(function(use)
   -- surrounding
   use 'tpope/vim-surround'
 
+  -- something i will figure out
+  use 'unblevable/quick-scope'
+
   -- indient line
   use 'Yggdroot/indentLine'
 
+  -- hard time with VIM
+  use 'takac/vim-hardtime'
 
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
@@ -95,17 +100,7 @@ return packer.startup(function(use)
   -- this bar at the bottom of a window
   use 'nvim-lualine/lualine.nvim'
 
-  -- COLORSCHEMES
-  use 'morhetz/gruvbox'
-  use "folke/tokyonight.nvim"
-  use "lunarvim/darkplus.nvim"
-  use "joshdick/onedark.vim"
-  use 'EdenEast/nightfox.nvim'
-
-  -- markdown preview
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-
-  -- show possible key for posssible key
+  -- Lua
   use {
     "folke/which-key.nvim",
     config = function()
@@ -116,6 +111,16 @@ return packer.startup(function(use)
       }
     end
   }
+
+  -- COLORSCHEMES
+  use 'morhetz/gruvbox'
+  use "folke/tokyonight.nvim"
+  use "lunarvim/darkplus.nvim"
+  use "joshdick/onedark.vim"
+  use 'EdenEast/nightfox.nvim'
+
+  -- markdown preview
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Put this at the end after all plugins
   if packer_bootstrap then

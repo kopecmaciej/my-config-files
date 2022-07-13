@@ -211,6 +211,11 @@ _G.packer_plugins = {
     path = "/home/maciej/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["quick-scope"] = {
+    loaded = true,
+    path = "/home/maciej/.local/share/nvim/site/pack/packer/start/quick-scope",
+    url = "https://github.com/unblevable/quick-scope"
+  },
   ["schemastore.nvim"] = {
     loaded = true,
     path = "/home/maciej/.local/share/nvim/site/pack/packer/start/schemastore.nvim",
@@ -245,6 +250,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/maciej/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-hardtime"] = {
+    loaded = true,
+    path = "/home/maciej/.local/share/nvim/site/pack/packer/start/vim-hardtime",
+    url = "https://github.com/takac/vim-hardtime"
   },
   ["vim-surround"] = {
     loaded = true,

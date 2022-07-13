@@ -37,6 +37,12 @@ keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", opts)
 keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", opts)
 keymap("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
 
+-- Telescope
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
+
 -- Lspsaga
 keymap("n", "<leader>gt", "<cmd>Lspsaga toogle_cirtual_text<cr>", opts)
 keymap("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
@@ -53,8 +59,10 @@ keymap("t", "<A-d>", "<cmd>Lspsaga close_floaterm<cr>", opts)
 -- Format without language server
 keymap("n", "<space>n", '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<cr>', opts)
 
-
 -- Bufferline
+keymap("n", "<TAB>", '<cmd>BufferLineCycleNext<CR>', opts)
+keymap("n", "<S-TAB>", '<cmd>BufferLineCyclePrev<CR>', opts)
+
 keymap("n", "<leader>1", '<cmd>BufferLineGoToBuffer 1<CR>', opts)
 keymap("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", opts)
 keymap("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", opts)
