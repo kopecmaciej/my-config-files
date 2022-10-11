@@ -100,27 +100,12 @@ return packer.startup(function(use)
   -- this bar at the bottom of a window
   use 'nvim-lualine/lualine.nvim'
 
-  -- Lua
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
-
   -- COLORSCHEMES
   use 'morhetz/gruvbox'
   use "folke/tokyonight.nvim"
   use "lunarvim/darkplus.nvim"
   use "joshdick/onedark.vim"
   use 'EdenEast/nightfox.nvim'
-
-  -- markdown preview
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Put this at the end after all plugins
   if packer_bootstrap then

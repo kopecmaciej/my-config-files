@@ -6,7 +6,8 @@ if [[ "$pull" == *"up to date"* ]]; then
     exit 0
 else
     git pull
-    cp dotfiles/.config/nvim/init.vim dotfiles/.config/nvim/coc-settings.json dotfiles/.config/nvim/    
+    cp dotfiles/.config/nvim/* home/$USER/.congi/nvim/
+    cp dotfiles/.config/kitty/* home/$USER/.congi/kitty/
 fi
 
 
