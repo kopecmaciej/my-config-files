@@ -3,7 +3,8 @@ local fn = vim.fn
 -- install packer
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+    install_path })
 
 end
 
@@ -33,7 +34,16 @@ return packer.startup(function(use)
   -- for packer automanagement
   use "wbthomason/packer.nvim"
 
-  -- ESENTIALS:
+  -- Plugins summary
+  -- 1. LSP
+  -- 2. Treesitter
+  -- 3. Completion
+  -- 4. Telescope
+  -- 5. Git
+  -- 6. Statusline
+  -- 7. File explorer
+  -- 8. COLORSCHEMES
+  -- 9. Helpers
 
   -- nvim telescope
   use 'nvim-telescope/telescope.nvim'
@@ -63,12 +73,21 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
 
+  -- LANGUAGE SPECIFIC:
+
+  -- Debbuger
+  use 'mfussenegger/nvim-dap'
+
   -- Treesitter for syntax highlight
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
 
+  -- Terminal
+  use 'akinsho/toggleterm.nvim'
+
+  -- bufferline
   use { 'akinsho/bufferline.nvim', tag = "v2.*" }
 
   -- UTILS:
@@ -106,6 +125,20 @@ return packer.startup(function(use)
   use "lunarvim/darkplus.nvim"
   use "joshdick/onedark.vim"
   use 'EdenEast/nightfox.nvim'
+
+  -- 9. Helpers
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
   -- Put this at the end after all plugins
   if packer_bootstrap then

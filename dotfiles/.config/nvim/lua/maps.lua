@@ -30,7 +30,7 @@ keymap('n', '<leader>c', ':nohl<CR>', opts)
 keymap('n', '<leader>s', ':w<CR>', opts)
 
 -- Trouble
-keymap("n", "<leader>tx", "<cmd>Trouble<cr>", opts)
+keymap("n", "<leader>tx", "<cmd>TroubleToggle<cr>", opts)
 keymap("n", "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
 keymap("n", "<leader>td", "<cmd>Trouble document_diagnostics<cr>", opts)
 keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", opts)
@@ -53,8 +53,11 @@ keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 keymap("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
-keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<cr>", opts)
-keymap("t", "<A-d>", "<cmd>Lspsaga close_floaterm<cr>", opts)
+
+-- terminal
+--lazygit
+keymap("n", "<leader>lg", ":lua _lazygit_toggle()<CR>", term_opts)
+keymap("n", "<leader>ncu", ":lua _ncdu_toggle()<CR>", term_opts)
 
 -- Format without language server
 keymap("n", "<space>n", '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<cr>', opts)
@@ -72,3 +75,5 @@ keymap("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", opts)
 keymap("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", opts)
 keymap("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", opts)
+
+keymap("i", "<C-a>", "copilot#Accept('<CR>')", { expr = true, silent = true })

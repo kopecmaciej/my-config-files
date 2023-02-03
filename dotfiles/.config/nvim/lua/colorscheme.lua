@@ -1,4 +1,4 @@
-local colorscheme = "gruvbox"
+local colorscheme = "darkplus"
 
 -- Example config in Lua
 vim.g.tokyonight_style = "night"
