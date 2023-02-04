@@ -20,6 +20,9 @@ keymap('n', '<C-f>', ':NvimTreeFindFile<CR>', opts) -- search file
 keymap('i', '<A-l>', '<C-o>a', opts)
 keymap('i', '<A-k>', '<C-o>k', opts)
 
+keymap('i', '<C-b>', '<ESC>^i', opts)
+keymap('i', '<C-e>', '<End>', opts)
+
 -- Press jj fast to enter
 keymap("i", "jj", "<ESC>", opts)
 
@@ -63,17 +66,55 @@ keymap("n", "<leader>ncu", ":lua _ncdu_toggle()<CR>", term_opts)
 keymap("n", "<space>n", '<cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<cr>', opts)
 
 -- Bufferline
-keymap("n", "<TAB>", '<cmd>BufferLineCycleNext<CR>', opts)
-keymap("n", "<S-TAB>", '<cmd>BufferLineCyclePrev<CR>', opts)
+-- keymap("n", "<TAB>", '<cmd>BufferLineCycleNext<CR>', opts)
+-- keymap("n", "<S-TAB>", '<cmd>BufferLineCyclePrev<CR>', opts)
 
-keymap("n", "<leader>1", '<cmd>BufferLineGoToBuffer 1<CR>', opts)
-keymap("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", opts)
-keymap("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", opts)
-keymap("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", opts)
-keymap("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", opts)
-keymap("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", opts)
-keymap("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", opts)
-keymap("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", opts)
-keymap("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", opts)
+-- keymap("n", "<leader>1", '<cmd>BufferLineGoToBuffer 1<CR>', opts)
+-- keymap("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", opts)
+-- keymap("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", opts)
+-- keymap("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", opts)
+-- keymap("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", opts)
+-- keymap("n", "<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>", opts)
+-- keymap("n", "<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>", opts)
+-- keymap("n", "<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>", opts)
+-- keymap("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>", opts)
+-- keymap("n", "<leader>x", "<cmd>BufferLinePickClose<CR>", opts)
 
 keymap("i", "<C-a>", "copilot#Accept('<CR>')", { expr = true, silent = true })
+
+-- Move to previous/next
+keymap('n', '<S-TAB>', '<Cmd>BufferPrevious<CR>', opts)
+keymap('n', '<TAB>', '<Cmd>BufferNext<CR>', opts)
+-- Re-order to previous/next
+keymap('n', '<C-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+keymap('n', '<C->>', '<Cmd>BufferMoveNext<CR>', opts)
+-- Goto buffer in position...
+keymap('n', '<leader>1', '<Cmd>BufferGoto 1<CR>', opts)
+keymap('n', '<leader>2', '<Cmd>BufferGoto 2<CR>', opts)
+keymap('n', '<leader>3', '<Cmd>BufferGoto 3<CR>', opts)
+keymap('n', '<leader>4', '<Cmd>BufferGoto 4<CR>', opts)
+keymap('n', '<leader>5', '<Cmd>BufferGoto 5<CR>', opts)
+keymap('n', '<leader>6', '<Cmd>BufferGoto 6<CR>', opts)
+keymap('n', '<leader>7', '<Cmd>BufferGoto 7<CR>', opts)
+keymap('n', '<leader>8', '<Cmd>BufferGoto 8<CR>', opts)
+keymap('n', '<leader>9', '<Cmd>BufferGoto 9<CR>', opts)
+keymap('n', '<leader>0', '<Cmd>BufferLast<CR>', opts)
+-- Pin/unpin buffer
+keymap('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+-- Close buffer
+keymap('n', '<leader>x', '<Cmd>BufferClose<CR>', opts)
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+-- Sort automatically by...
+keymap('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+keymap('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+keymap('n', '<leader>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+keymap('n', '<leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)

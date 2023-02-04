@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cp -r ~/.config/nvim ./dotfiles/.config/
-cp -r ~/.config/fish ./dotfiles/.config/
+cp -r ~/.config/nvim/init.lua ./dotfiles/.config/nvim
+cp -r ~/.config/fish/config.fish ./dotfiles/.config/fish
 # cp -r ~/.config/kitty ./dotfiles/.config/
 
 git add .

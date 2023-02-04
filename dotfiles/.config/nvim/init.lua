@@ -12,6 +12,6 @@ require 'lsp-config'
 require 'autopairs-config'
 require 'null-ls-config'
 require 'lspsaga-config'
-require 'bufferline-config'
+-- require 'bufferline-config'
 require 'toggleterm-config'
 

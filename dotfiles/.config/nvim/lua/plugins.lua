@@ -72,7 +72,7 @@ return packer.startup(function(use)
   --    Nvim-Tree - file explorer
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
-
+  use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
   -- LANGUAGE SPECIFIC:
 
   -- Debbuger
