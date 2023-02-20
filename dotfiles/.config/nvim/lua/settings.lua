@@ -21,7 +21,7 @@ set.incsearch = true
 set.signcolumn = "yes"
 set.termguicolors = true
 
-set.listchars = { eol = '↵', tab = '▸ ', trail = '·', extends = '>', precedes = '<' }
+set.listchars = { eol = '↵', tab = '  ', trail = '·', extends = '>', precedes = '<' }
 set.list = true
 --set.listchars:append({ extends = "tab:>\ ,trail:-,extends:>,precedes:<,eol:¬" })
 set.backup = false

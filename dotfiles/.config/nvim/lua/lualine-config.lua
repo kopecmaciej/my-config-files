@@ -6,5 +6,6 @@ end
 lualine.setup({
   options = {
     theme = 'gruvbox'
-  }
+  },
+  -- sections = { lualine_c = { require('auto-session-library').current_session_name } }
 })

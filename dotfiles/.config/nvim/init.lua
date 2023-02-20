@@ -12,6 +12,11 @@ require 'lsp-config'
 require 'autopairs-config'
 require 'null-ls-config'
 require 'lspsaga-config'
--- require 'bufferline-config'
 require 'toggleterm-config'
-
+require "config/aerial"
+require 'gitsigns-config'
+require 'config/luasnip'
+require 'config/neotest'
+require 'config/nvim-dap'
+require 'config/leap'
+require("mason").setup()

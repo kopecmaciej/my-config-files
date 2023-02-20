@@ -1,13 +1,13 @@
-require("nvim-lsp-installer").setup {
-  automatic_installation = true
-}
+-- require("nvim-lsp-installer").setup {
+--   automatic_installation = true
+-- }
 local lspconfig = require('lspconfig')
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
+  { name = "DiagnosticSignWarn",  text = "" },
+  { name = "DiagnosticSignHint",  text = "" },
+  { name = "DiagnosticSignInfo",  text = "" },
 }
 
 for _, sign in ipairs(signs) do
@@ -43,6 +43,7 @@ vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<
 local buf_keymap = vim.api.nvim_buf_set_keymap
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+
 local on_attach = function(client, bufnr)
   require('nvim-lsp-ts-utils').setup({
     filter_out_diagnostics_by_code = { 80001 },
@@ -50,6 +51,12 @@ local on_attach = function(client, bufnr)
   require('nvim-lsp-ts-utils').setup_client(client)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+    vim.diagnostic.disable(bufnr)
+    vim.defer_fn(function()
+      vim.diagnostic.reset(nil, bufnr)
+    end, 1000)
+  end
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- if client.name == "tsserver" then
   --   client.server_capabilities.document_formatting = false -- 0.7 and earlier
@@ -57,7 +64,6 @@ local on_attach = function(client, bufnr)
   -- end
   buf_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -71,7 +77,7 @@ local strategy = { 'exact', 'substring', 'fuzzy' }
 vim.g.completion_matching_strategy_list = strategy
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'sumneko_lua', 'dockerls', 'eslint', "tsserver" }
+local servers = { 'gopls', 'dockerls', 'eslint', "tsserver" }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -91,23 +97,50 @@ lspconfig.jsonls.setup {
 lspconfig.yamlls.setup {
   on_attach = on_attach,
   settings = {
+    -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
+    redhat = { telemetry = { enabled = false } },
     yaml = {
       trace = {
         server = "verbose"
       },
-      schemaStore = {
-        url = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.20.5-standalone-strict/_definitions.json"
-      },
-      schemas = {
-        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/*.yaml",
-        kubernetes = "/*.yml"
-      },
-      schemaDownload = { enable = true },
-      validate = { enable = true },
+      -- schemaStore = {
+      --   url = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.20.5-standalone-strict/_definitions.json"
+      -- },
+      -- schemas = {
+      --   ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/*.yaml",
+      --   kubernetes = "/*.yml"
+      -- },
+      -- schemaDownload = { enable = true },
+      -- validate = { enable = true },
     }
   },
 }
+
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require 'lspconfig'.cssls.setup {

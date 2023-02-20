@@ -23,16 +23,17 @@ toggleterm.setup({
   }
 })
 
-local Terminal  = require('toggleterm.terminal').Terminal
+local Terminal = require('toggleterm.terminal').Terminal
 
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _lazygit_toggle()
+function _Lazygit_toggle()
   lazygit:toggle()
 end
 
 local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
 
-function _ncdu_toggle()
+function _Ncdu_toggle()
   ncdu:toggle()
 end
+
