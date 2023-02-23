@@ -4,13 +4,13 @@ end
 
 set -gx EDITOR nvim
 
+set WORK_EDITOR lvim
 set WORK_DIR /home/cieju/work
 
 # Generated for envman. Do not edit.
 test -s "$HOME/.config/envman/load.fish"; and source "$HOME/.config/envman/load.fish"
 
-alias v="nvim"
-alias vh="nvim ."
+alias v=$WORK_EDITOR
 
 alias k=kubectl
 alias d=docker
@@ -22,8 +22,8 @@ alias k_default="k config use-context default"
 alias k_lerta_prod="k config use-context gke_sodium-bliss-130615_europe-west1-d_cloudthing-beta"
 alias k_lerta_dev="k config use-context gke_sodium-bliss-130615_europe-west1-d_cloudthing-development"
 alias lg="lazygit"
-alias cfish="cd ~/.config/fish; nvim ."
-alias cnvim="cd ~/.config/nvim; nvim ."
+alias cfish="cd ~/.config/fish; $WORK_EDITOR"
+alias cnvim="cd ~/.config/nvim; $WORK_EDITOR"
 alias reload="source ~/.config/fish/config.fish"
 alias aws-my="docker run -it -v ~/.docker/custom/aws:/config/.aws/ -v $PWD:/shared -v /var/run/docker.sock:/var/run/docker.sock:rw aws-cli:latest"
 
@@ -43,7 +43,7 @@ function ff
     cd $(find * -type d | fzf)  
 end
 
-set fzf_directory_opts --bind "enter:execute(cd {}; $EDITOR {} &> /dev/tty)" --bind "ctrl-o:execute(cd `{}`)+abort"
+set fzf_directory_opts --bind "enter:execute(cd {}; $WORK_EDITOR &> /dev/tty)+abort" --bind "ctrl-o:execute(cd {};  &> /dev/tty)+abort"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google-cloud-sdk/path.fish.inc' ]; . '/usr/local/google-cloud-sdk/path.fish.inc'; end
