@@ -8,7 +8,11 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+
 -- general
+vim.opt.wrap = true
+vim.opt.relativenumber = true
+
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
 lvim.colorscheme = "onedark"
@@ -24,12 +28,20 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<cr>"
 lvim.keys.normal_mode["<C-x>"] = ":BufferKill<cr>"
 lvim.keys.normal_mode["<C-f>"] = ":NvimTreeFocus<cr>"
 lvim.keys.normal_mode["<C-n>"] = ":NvimTreeToggle<cr>"
+lvim.keys.normal_mode["<C-p>"] = ":ChatGPT<cr>"
+-- Paste in visual mode without copying the selection
+lvim.keys.visual_mode["p"] = '"_dP'
 
 -- Remove the default <C-l> mapping in terminal mode
 lvim.keys.term_mode = { ["<C-l>"] = false }
 lvim.builtin.terminal.open_mapping = "<A-d>"
+
 lvim.keys.insert_mode["jj"] = "<Esc>"
-vim.keymap.set("i", "<C-a>", "copilot#Accept('<CR>')", {noremap = true, silent = true, expr=true, replace_keycodes = false })
+lvim.keys.insert_mode["<C-l>"] = "<Right>"
+lvim.keys.insert_mode["<C-k>"] = "<Left>"
+
+vim.keymap.set("i", "<C-a>", "copilot#Accept('<CR>')",
+  { noremap = true, silent = true, expr = true, replace_keycodes = false })
 
 -- unmap a default keymapping
 -- vim.keymap.del()
@@ -59,6 +71,16 @@ lvim.builtin.telescope.defaults.mappings = {
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
+-- ChatGPT mappings
+lvim.builtin.which_key.mappings["h"] = {
+  name = "ChatGPT",
+  a = { "<cmd>ChatGPTActAs<cr>", "ChatGPT Act As" },
+  c = { "<cmd>ChatGPTCompleteCode<cr>", "ChatGPTCompleteCode" },
+  e = { "<cmd>ChatGPTEditWithInstructions<cr>", "ChatGPTEditWithInstructions" },
+  r = { "<cmd>ChatGPTRun<cr>", "ChatGPTRun" },
+  p = { "<cmd>ChatGPT<cr>", "ChatGPT" },
+}
+
 lvim.builtin.which_key.mappings["f"] = {
   name = "Search",
   f = { "<cmd>Telescope find_files<CR>", "Find files" },
@@ -95,15 +117,12 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
   "javascript",
-  "json",
+  -- "json",
   "lua",
   "python",
   "typescript",
   "tsx",
-  "css",
-  "rust",
   "java",
   "yaml",
 }
@@ -114,10 +133,6 @@ lvim.builtin.treesitter.highlight.enable = true
 -- generic LSP settings
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
--- lvim.lsp.installer.setup.ensure_installed = {
---     "sumneko_lua",
---     "jsonls",
--- }
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
 -- lvim.lsp.installer.setup.ui.check_outdated_servers_on_open = false
@@ -144,23 +159,45 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+
+lvim.lsp.on_attach_callback = function(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+    vim.diagnostic.disable(bufnr)
+    vim.defer_fn(function()
+      vim.diagnostic.reset(nil, bufnr)
+    end, 1000)
+  end
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
     command = "prettier",
-    filetypes = { "typescript", "typescriptreact" },
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "json", "yaml" }
   },
 }
 
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    command = "jsonlint",
+    filetypes = { "json" },
+  },
+}
+
+-- local code_actions = require "lvim.lsp.null-ls.code_actions"
+-- code_actions.setup {
+--   {
+--     command = "jsonlsp",
+--     filetypes = { "json" },
+--   },
+-- }
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
 -- linters.setup {
@@ -199,12 +236,120 @@ lvim.plugins = {
       vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
     end,
   },
+  { "towolf/vim-helm" },
   {
     "folke/lsp-colors.nvim",
     event = "BufRead",
   },
-  { "joshdick/onedark.vim" }
+  { "joshdick/onedark.vim" },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      vim.g.gitblame_enabled = 0
+    end,
+  },
+  {
+    "turbio/bracey.vim",
+    cmd = { "Bracey", "BracyStop", "BraceyReload", "BraceyEval" },
+    run = "npm install --prefix server",
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup({
+        welcome_message = "Hello, I'm ChatGPT. Ask me anything!",
+        loading_text = "loading",
+        question_sign = "", -- you can use emoji if you want e.g. 🙂
+        answer_sign = "ﮧ", -- 🤖
+        max_line_length = 120,
+        yank_register = "+",
+        chat_layout = {
+          relative = "editor",
+          position = "50%",
+          size = {
+            height = "80%",
+            width = "80%",
+          },
+        },
+        settings_window = {
+          border = {
+            style = "rounded",
+            text = {
+              top = " Settings ",
+            },
+          },
+        },
+        chat_window = {
+          filetype = "chatgpt",
+          border = {
+            highlight = "FloatBorder",
+            style = "rounded",
+            text = {
+              top = " ChatGPT ",
+            },
+          },
+        },
+        chat_input = {
+          prompt = "  ",
+          border = {
+            highlight = "FloatBorder",
+            style = "rounded",
+            text = {
+              top_align = "center",
+              top = " Prompt ",
+            },
+          },
+        },
+        openai_params = {
+          model = "gpt-3.5-turbo",
+          frequency_penalty = 0,
+          presence_penalty = 0,
+          max_tokens = 300,
+          temperature = 0,
+          top_p = 1,
+          n = 1,
+        },
+        openai_edit_params = {
+          model = "code-davinci-edit-001",
+          temperature = 0,
+          top_p = 1,
+          n = 1,
+        },
+        keymaps = {
+          close = { "<C-c>" },
+          submit = "<C-a>",
+          yank_last = "<C-y>",
+          yank_last_code = "<C-k>",
+          scroll_up = "<C-u>",
+          scroll_down = "<C-d>",
+          toggle_settings = "<C-o>",
+          new_session = "<C-n>",
+          cycle_windows = "<Tab>",
+          -- in the Sessions pane
+          select_session = "<Space>",
+          rename_session = "r",
+          delete_session = "d",
+        },
+      })
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  }
 }
+
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
 table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" }) -- Autocommands (https://neovim.io/doc/user/autocmd.html)

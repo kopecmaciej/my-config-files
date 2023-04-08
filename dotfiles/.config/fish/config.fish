@@ -26,22 +26,36 @@ alias cfish="cd ~/.config/fish; $WORK_EDITOR"
 alias cnvim="cd ~/.config/nvim; $WORK_EDITOR"
 alias reload="source ~/.config/fish/config.fish"
 alias aws-my="docker run -it -v ~/.docker/custom/aws:/config/.aws/ -v $PWD:/shared -v /var/run/docker.sock:/var/run/docker.sock:rw aws-cli:latest"
+alias notibox_start="docker-compose -f ~/work/notibox/notibox-configurator/docker-compose.yml up -d"
+alias notibox_stop="docker-compose -f ~/work/notibox/notibox-configurator/docker-compose.yml down"
 
-function fw
+function lv 
+  cd $argv[1] | $WORK_EDITOR
+end
+
+function fzfw
     cd $WORK_DIR; _fzf_search_directory
 end
 
-function fwl
+function fzfl
     cd $WORK_DIR/lerta; _fzf_search_directory
 end
 
-function fh 
+function fzfh
     cd $(find $HOME -maxdepth 4 -type d  | fzf)  
+end
+
+function fzfc
+    cd ~/.config; _fzf_search_directory
 end
 
 function ff 
     cd $(find * -type d | fzf)  
 end
+
+bind \cg 'lazygit'
+
+bind \ef 'v $(echo _fzf_search_directory)'
 
 set fzf_directory_opts --bind "enter:execute(cd {}; $WORK_EDITOR &> /dev/tty)+abort" --bind "ctrl-o:execute(cd {};  &> /dev/tty)+abort"
 
@@ -50,4 +64,4 @@ if [ -f '/usr/local/google-cloud-sdk/path.fish.inc' ]; . '/usr/local/google-clou
 
 # The next line enables shell command completion for gcloud.
 bass source '/usr/local/google-cloud-sdk/completion.bash.inc'
-alias gss='git status'
+alias gss='git status --oneline'
