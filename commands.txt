@@ -1,1 +1,0 @@
-fish.last.argument:<ALT+.>
