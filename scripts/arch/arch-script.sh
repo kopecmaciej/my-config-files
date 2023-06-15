@@ -7,6 +7,8 @@ cd ..
 rm -rf yay
 
 yay -S /
+  fish /
+  fisher /
   spaceship-prompt /
   docker /
   docker-compose /

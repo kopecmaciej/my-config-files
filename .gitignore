@@ -1,3 +1,7 @@
 node_modules
 packer_compiled.lua
 
+dotfiles/.config/fish/conf.d
+dotfiles/.config/fish/completions
+dotfiles/.config/fish/functions
+

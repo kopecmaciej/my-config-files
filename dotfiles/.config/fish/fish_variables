@@ -1,14 +1,22 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export --path FORWARDER_PATH:/home/cieju/work/lerta/developer\x2dtools/port\x2dforwarder/
+SETUVAR --export EDITOR:nvim
+SETUVAR --export --path FORWARDER_PATH:/home/cieju/work/lerta/developer\x2dtools/port\x2dforwarder
 SETUVAR --export --path GOPATH:/home/cieju/go
 SETUVAR --export GOPRIVATE:gitlab\x2ecom/lerta/\x2a\x2cgitlab\x2ecom/cloudthing/\x2a
+SETUVAR --export OPENAI_API_KEY:sk\x2dwfwQwLUcIjkd1T2rLYKpT3BlbkFJTvwoAFm3ghloBUNYk2MJ
+SETUVAR --export --path PATH:/home/cieju/\x2elocal/bin\x20\x7e/go/bin\x20/usr/local/google\x2dcloud\x2dsdk/bin\x20/home/cieju/\x2elocal/bin\x20/home/cieju/\x2esdkman/candidates/maven/current/bin\x20/home/cieju/\x2esdkman/candidates/java/current/bin\x20/usr/local/bin\x20/usr/local/sbin\x20/usr/bin\x20/usr/sbin\x20/home/cieju/\x2elocal/bin
+SETUVAR --export TERM:xterm\x2d256color
 SETUVAR --export USE_GKE_GCLOUD_AUTH_PLUGIN:True
+SETUVAR --export XDG_CONFIG_HOME:/home/cieju/\x2econfig/
 SETUVAR __fish_initialized:3400
+SETUVAR _fisher_danhper_2F_fish_2D_ssh_2D_agent_files:\x7e/\x2econfig/fish/functions/__ssh_agent_is_started\x2efish\x1e\x7e/\x2econfig/fish/functions/__ssh_agent_start\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fish\x2dssh\x2dagent\x2efish
 SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass\x1ejorgebucaran/nvm\x2efish
+SETUVAR _fisher_patrickf1_2F_fzf_2E_fish_files:\x7e/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_changed_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_diff_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e\x7e/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e\x7e/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass\x1ejorgebucaran/nvm\x2efish\x1ereitzig/sdkman\x2dfor\x2dfish\x40v1\x2e4\x2e0\x1edanhper/fish\x2dssh\x2dagent\x1epatrickf1/fzf\x2efish
+SETUVAR _fisher_reitzig_2F_sdkman_2D_for_2D_fish_40_v1_2E_34_2E_30__files:\x7e/\x2econfig/fish/functions/sdk\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/sdk\x2efish\x1e\x7e/\x2econfig/fish/completions/sdk\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
@@ -38,6 +46,9 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/usr/local/go/bin
+SETUVAR --export fish_pwd:/home/cieju/Postman
+SETUVAR fish_user_paths:/home/cieju/go/bin\x1e/usr/local/go/bin\x1e/home/cieju/\x2efzf/bin
 SETUVAR nvm_data:/home/cieju/\x2elocal/share/nvm
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist
+SETUVAR --export v:lvim
+SETUVAR --export zen_music:
