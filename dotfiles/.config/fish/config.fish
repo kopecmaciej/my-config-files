@@ -49,6 +49,11 @@ function ff
     cd $(find * -type d | fzf)  
 end
 
+if status is-interactive
+and not set -q TMUX
+    exec tmux
+end
+
 bind \cg 'lazygit'
 bind \cf '_fzf_search_directory'
 

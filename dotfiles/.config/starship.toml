@@ -5,6 +5,7 @@ format = """
 [  ](bg:#a3aed2 fg:#090c0c)\
 [](bg:#005f00 fg:#a3aed2)\
 $directory\
+$kubernetes\
 [](fg:#005f00 bg:#5e6880)\
 $git_branch\
 $git_status\
@@ -12,6 +13,7 @@ $git_status\
 $nodejs\
 $rust\
 $golang\
+[](fg:#212736 bg:#1d2230)\
 $php\
 [](fg:#212736 bg:#1d2230)\
 $time\
@@ -59,3 +61,13 @@ disabled = true
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[kubernetes]
+symbol = '☸ '
+disabled = false
+style = "bg:#005f00"
+format = '[ $symbol$context ](bg:#005f00 fg:#e3e5e5)'
+[kubernetes.context_aliases]
+'dev.local.cluster.k8s' = 'dev'
+'.*/openshift-cluster/.*' = 'openshift'
+'gke_.*_(?P<var_cluster>[\w-]+)' = 'gke-$var_cluster'

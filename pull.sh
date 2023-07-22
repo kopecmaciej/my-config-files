@@ -2,16 +2,19 @@
 
 pull="$(git pull)"
 
+config_dirs=(
+    ".config/fish/config.fish"
+    ".config/lvim/config.lua"
+    ".config/starship.toml"
+)
+
 if [[ "$pull" == *"up to date"* ]]; then
     exit 0
 else
     git pull
-    cp dotfiles/.config/fish/config.fish home/$USER/.config/fish/
-    cp dotfiles/.config/lvim/config.lua home/$USER/.config/lvim/
+    rsync -a dotfiles/.config/fish/config.fish home/$USER/.config/fish/
+    rsync -a dotfiles/.config/lvim/config.lua home/$USER/.config/lvim/
+    rsync -a dotfiles/.config/starship.toml home/$USER/.config/starship.toml
 fi
 
-# Install Copilot
-if [ ! -d ~/.local/share/lunarvim/site/pack/github/start/copilot.vim ]; then
-  git clone https://github.com/github/copilot.vim.git ~/.local/share/lunarvim/site/pack/github/start/copilot.vim
-fi
 
