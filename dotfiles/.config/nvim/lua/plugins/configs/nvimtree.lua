@@ -3,7 +3,6 @@ local options = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
-  update_cwd = true,
   disable_netrw = true,
   hijack_netrw = true,
   hijack_cursor = true,
@@ -11,22 +10,13 @@ local options = {
   sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
-    update_cwd = false,
+    update_root = false,
   },
   view = {
     adaptive_size = false,
     side = "left",
     width = 30,
     preserve_window_proportions = true,
-  },
-  diagnostics = {
-    enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    },
   },
   git = {
     enable = false,
@@ -36,23 +26,8 @@ local options = {
     enable = true,
   },
   actions = {
-    use_system_clipboard = true,
-    change_dir = {
-      enable = true,
-      global = false,
-      restrict_above_cwd = false,
-    },
     open_file = {
-      quit_on_open = false,
-      resize_window = false,
-      window_picker = {
-        enable = true,
-        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-        exclude = {
-          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-          buftype = { "nofile", "terminal", "help" },
-        },
-      },
+      resize_window = true,
     },
   },
   renderer = {
@@ -76,12 +51,12 @@ local options = {
         default = "󰈚",
         symlink = "",
         folder = {
-          default = "󰉋",
-          empty = "",
-          empty_open = "",
+          default = "",
+          empty = "",
+          empty_open = "",
           open = "",
-          symlink = "",
-          symlink_open = "",
+          symlink = "",
+          symlink_open = "",
           arrow_open = "",
           arrow_closed = "",
         },

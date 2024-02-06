@@ -19,7 +19,8 @@ struct ColorInfo colorTable[] = {
     {"white", "\033[0;37m"},
 };
 
-const char* get_color_code(const char* color) {
+const char* get_color_code(const char* color) 
+{
     for (int i = 0; i < sizeof(colorTable) / sizeof(colorTable[0]); i++) {
         if (strcmp(color, colorTable[i].name) == 0) {
             return colorTable[i].code;
@@ -141,8 +142,9 @@ void print_battery_usage(void)
   fscanf(batteryFile, "%d", &battery);
   fclose(batteryFile);
 
-  if (battery < 50)
-  printf("%sBattery: %s%d%%\n", get_color_code("yellow"), get_color_code("white"), battery);
+  if (battery < 50) {
+    printf("%sBattery: %s%d%%\n", get_color_code("yellow"), get_color_code("white"), battery);
+  }
 }
 
 void print_num_of_running_processes() {
